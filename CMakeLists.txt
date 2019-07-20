@@ -84,6 +84,9 @@ if(SFML_BUILD_WINDOW)
     sfml_set_option(SFML_OPENGL_ES ${OPENGL_ES} BOOL "TRUE to use an OpenGL ES implementation, FALSE to use a desktop OpenGL implementation")
 endif()
 
+# add an option for building the test suite
+sfml_set_option(SFML_BUILD_TEST_SUITE FALSE BOOL "TRUE to build the SFML test suite, FALSE to ignore it")
+
 # macOS specific options
 if(SFML_OS_MACOSX)
     # add an option to build frameworks instead of dylibs (release only)
@@ -280,6 +283,14 @@ if(SFML_BUILD_EXAMPLES)
 endif()
 if(SFML_BUILD_DOC)
     add_subdirectory(doc)
+endif()
+if(SFML_BUILD_TEST_SUITE)
+    if (SFML_OS_IOS)
+        message( WARNING "Unit testing not supported on iOS")
+    else()
+        enable_testing()
+        add_subdirectory(test)
+    endif()
 endif()
 
 # on Linux and BSD-like OS, install pkg-config files by default
