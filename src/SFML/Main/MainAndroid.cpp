@@ -303,7 +303,9 @@ static void onResume(ANativeActivity* activity)
     sf::Event event;
     event.type = sf::Event::MouseEntered;
 
-    states->forwardEvent(event);
+    if(states->forwardEvent != NULL){
+        states->forwardEvent(event);
+    }
 }
 
 
@@ -318,7 +320,9 @@ static void onPause(ANativeActivity* activity)
     sf::Event event;
     event.type = sf::Event::MouseLeft;
 
-    states->forwardEvent(event);
+    if(states->forwardEvent != NULL){
+        states->forwardEvent(event);
+    }
 }
 
 
