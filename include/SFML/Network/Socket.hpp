@@ -69,6 +69,8 @@ public:
     };
 
 public:
+    Socket(Socket&&);
+    Socket& operator=(Socket&&);
 
     ////////////////////////////////////////////////////////////
     /// \brief Destructor

@@ -43,6 +43,26 @@ m_isBlocking(true)
 
 
 ////////////////////////////////////////////////////////////
+Socket::Socket(Socket &&rvalue) : Socket(rvalue.m_type)
+{
+    std::swap(m_socket, rvalue.m_socket);
+    std::swap(m_isBlocking, rvalue.m_isBlocking);
+}
+
+
+////////////////////////////////////////////////////////////
+Socket& Socket::operator=(Socket &&rvalue) {
+    Socket tmp(std::move(rvalue));
+
+    std::swap(m_type, tmp.m_type);
+    std::swap(m_socket, tmp.m_socket);
+    std::swap(m_isBlocking, tmp.m_isBlocking);
+
+    return *this;
+}
+
+
+////////////////////////////////////////////////////////////
 Socket::~Socket()
 {
     // Close the socket before it gets destructed
