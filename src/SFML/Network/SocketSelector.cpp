@@ -153,7 +153,7 @@ void SocketSelector::clear()
 
 
 ////////////////////////////////////////////////////////////
-bool SocketSelector::wait(Time timeout)
+int SocketSelector::wait(Time timeout)
 {
     // Setup the timeout
     timeval time;
@@ -167,7 +167,7 @@ bool SocketSelector::wait(Time timeout)
     // The first parameter is ignored on Windows
     int count = select(m_impl->maxSocket + 1, &m_impl->socketsReady, NULL, NULL, timeout != Time::Zero ? &time : NULL);
 
-    return count > 0;
+    return count;
 }
 
 
