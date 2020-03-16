@@ -111,16 +111,17 @@ public:
     /// some data available to be received. To know which sockets are
     /// ready, use the isReady function.
     /// If you use a timeout and no socket is ready before the timeout
-    /// is over, the function returns false.
+    /// is over, the function returns zero.
+    /// If an error occured, the function returns -1 (see POSIX select(2)).
     ///
     /// \param timeout Maximum time to wait, (use Time::Zero for infinity)
     ///
-    /// \return True if there are sockets ready, false otherwise
+    /// \return Number of ready sockets, or -1 if an error occured.
     ///
     /// \see isReady
     ///
     ////////////////////////////////////////////////////////////
-    bool wait(Time timeout = Time::Zero);
+    int wait(Time timeout = Time::Zero);
 
     ////////////////////////////////////////////////////////////
     /// \brief Test a socket to know if it is ready to receive data
